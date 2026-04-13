@@ -18,9 +18,14 @@ texture = ExtResource("2_ykrsh")
 position = Vector2(598, 340)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=688437104]
+process_callback = 0
 
-[node name="Reticle" type="Node2D" parent="." unique_id=894946320]
-script = ExtResource("4_ykrsh")
+[node name="Reticle" type="CanvasLayer" parent="." unique_id=112645655]
 
-[node name="Sprite2D" type="Sprite2D" parent="Reticle" unique_id=384395749]
+[node name="Crosshair" type="TextureRect" parent="Reticle" unique_id=1393779004]
+offset_left = -25.0
+offset_top = -23.0
+offset_right = 23.0
+offset_bottom = 25.0
 texture = ExtResource("5_g14j6")
+script = ExtResource("4_ykrsh")
