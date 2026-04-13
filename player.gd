@@ -6,7 +6,7 @@ var direction := Vector2.ZERO
 var speed := 300
 var accuracy := 11
 var accuracy_modifier := 1.0
-var bullet_speed := 1000
+var bullet_speed := 2000
 var holstered:= false
 
 
