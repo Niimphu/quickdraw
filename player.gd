@@ -6,7 +6,6 @@ var direction := Vector2.ZERO
 var speed := 300
 var accuracy := 11
 var accuracy_modifier := 1.0
-var bullet_speed := 2000
 var holstered:= false
 
 
@@ -19,7 +18,7 @@ func _physics_process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot") and not holstered:
-		Gun.shoot(global_position, get_bullet_direction(), bullet_speed)
+		Gun.shoot(global_position, get_bullet_direction())
 	if event.is_action_pressed("reload"):
 		Gun.reload()
 
