@@ -1,7 +1,7 @@
 extends Node2D
 
 var bullet_scene := preload("res://bullet.tscn")
-var bullet_speed := 2000
+var bullet_speed := 4000
 
 var ammo := 6
 
