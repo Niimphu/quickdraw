@@ -6,6 +6,7 @@ var direction := Vector2.ZERO
 var speed := 300
 var accuracy := 11
 var accuracy_modifier := 1.0
+var min_accuracy_modifier := 0.5
 var holstered:= false
 
 
@@ -21,6 +22,17 @@ func _input(event: InputEvent) -> void:
 		Gun.shoot(global_position, get_bullet_direction())
 	if event.is_action_pressed("reload"):
 		Gun.reload()
+	if event.is_action_pressed("scroll_up"):
+		change_accuracy_modifier(-0.2)
+	if event.is_action_pressed("scroll_down"):
+		change_accuracy_modifier(0.2)
+
+
+func change_accuracy_modifier(amount: float) -> void:
+	accuracy_modifier += amount
+	if accuracy_modifier < 0.5:
+		accuracy_modifier = 0.5
+	EventBus.accuracy_modifier_changed.emit(accuracy_modifier)
 
 
 func get_bullet_direction() -> Vector2:
