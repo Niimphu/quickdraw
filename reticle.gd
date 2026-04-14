@@ -1,5 +1,7 @@
 extends TextureRect
 
+var current_tween: Tween
+
 var centre_dot = load("res://img/centredot.png")
 func _ready():
 	Input.set_custom_mouse_cursor(centre_dot, 0, Vector2(4, 4))
@@ -11,4 +13,8 @@ func _process(_delta: float) -> void:
 
 
 func _on_accuracy_modifier_changed(value: float) -> void:
-	scale = Vector2(value, value)
+	if current_tween and current_tween.is_valid() and current_tween.is_running():
+		current_tween.kill()
+	
+	current_tween = get_tree().create_tween()
+	current_tween.tween_property(self, "scale", Vector2(value, value), 0.2)
