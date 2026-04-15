@@ -17,4 +17,4 @@ func _on_accuracy_modifier_changed(value: float) -> void:
 		current_tween.kill()
 	
 	current_tween = get_tree().create_tween()
-	current_tween.tween_property(self, "scale", Vector2(value, value), 0.2)
+	current_tween.tween_property(self, "scale", Vector2(value, value), 0.1)
