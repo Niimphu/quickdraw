@@ -1,14 +1,24 @@
 extends Node2D
 
+@export var FireDelay: Timer
+
 var bullet_scene := preload("res://bullet.tscn")
 var bullet_speed := 4000
-
+var shooting := false
+var firing_delay := 0.2
 var ammo := 6
 
+func _ready() -> void:
+	FireDelay.wait_time = firing_delay
+	FireDelay.timeout.connect(_on_fire_delay_timeout)
+
+
 func shoot(bullet_position: Vector2, direction: Vector2, speed_modifier: float = 1.0) -> int:
-	if ammo < 1:
+	if ammo < 1 or shooting:
 		return 1
 	
+	FireDelay.start()
+	shooting = true
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = bullet_position
 	bullet.rotate(direction.orthogonal().angle())
@@ -20,3 +30,7 @@ func shoot(bullet_position: Vector2, direction: Vector2, speed_modifier: float =
 
 func reload() -> void:
 	ammo = 6
+
+
+func _on_fire_delay_timeout() -> void:
+	shooting = false
