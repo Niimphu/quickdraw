@@ -19,14 +19,19 @@ func shoot(bullet_position: Vector2, direction: Vector2, speed_modifier: float =
 	
 	FireDelay.start()
 	shooting = true
+	spawn_bullet(bullet_position, direction, speed_modifier)
+	ammo -= 1
+	
+	return 0
+
+
+func spawn_bullet(bullet_position: Vector2, direction: Vector2, speed_modifier: float):
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = bullet_position
 	bullet.rotate(direction.orthogonal().angle())
 	get_parent().get_parent().add_child(bullet)
 	bullet.fire(direction, bullet_speed)
-	ammo -= 1
-	
-	return 0
+
 
 func reload() -> void:
 	ammo = 6
