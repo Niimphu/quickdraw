@@ -19,7 +19,9 @@ func _physics_process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot") and not holstered:
-		Gun.shoot(global_position, get_bullet_direction())
+		if Gun.shoot(global_position, get_bullet_direction()) == 0:
+			#shooting animation
+			pass
 	if event.is_action_pressed("reload"):
 		Gun.reload()
 	if event.is_action_pressed("scroll_up"):

@@ -5,7 +5,7 @@ extends Node2D
 var bullet_scene := preload("res://bullet.tscn")
 var bullet_speed := 4000
 var shooting := false
-var firing_delay := 0.2
+var firing_delay := 0.3
 var ammo := 6
 
 func _ready() -> void:
