@@ -28,9 +28,7 @@ func _physics_process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot") and not holstered:
-		if Gun.shoot(global_position, get_bullet_direction()) == 0:
-			#shooting animation
-			pass
+		shoot_gun()
 	if event.is_action_pressed("reload"):
 		Gun.reload()
 	if event.is_action_pressed("scroll_up"):
@@ -44,6 +42,13 @@ func change_accuracy_modifier(amount: float) -> void:
 	if accuracy_modifier < 0.5:
 		accuracy_modifier = 0.5
 	EventBus.accuracy_modifier_changed.emit(accuracy_modifier)
+
+
+func shoot_gun() -> void:
+	var ignore_delay: bool = charged_bullets
+	if Gun.shoot(global_position, get_bullet_direction(), ignore_delay) == 0:
+		#shooting animation
+		pass
 
 
 func get_bullet_direction() -> Vector2:
