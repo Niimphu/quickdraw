@@ -7,4 +7,5 @@ script = ExtResource("1_wulko")
 FireDelay = NodePath("FireDelay")
 
 [node name="FireDelay" type="Timer" parent="." unique_id=994089087]
+wait_time = 0.6
 one_shot = true

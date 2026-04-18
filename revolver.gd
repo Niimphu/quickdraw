@@ -6,7 +6,8 @@ var bullet_scene := preload("res://bullet.tscn")
 var bullet_speed := 4000
 var shooting := false
 var firing_delay := 0.3
-var ammo := 6
+var max_ammo := 6
+var ammo := max_ammo
 
 func _ready() -> void:
 	FireDelay.wait_time = firing_delay
@@ -34,7 +35,7 @@ func spawn_bullet(bullet_position: Vector2, direction: Vector2, speed_modifier: 
 
 
 func reload() -> void:
-	ammo = 6
+	ammo = max_ammo
 
 
 func _on_fire_delay_timeout() -> void:

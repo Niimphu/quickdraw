@@ -10,9 +10,10 @@ height = 40.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_i3pqv"]
 radius = 33.13608
 
-[node name="Player" type="CharacterBody2D" unique_id=1997606648 node_paths=PackedStringArray("Gun")]
+[node name="Player" type="CharacterBody2D" unique_id=1997606648 node_paths=PackedStringArray("Gun", "ChargeInterval")]
 script = ExtResource("1_onrkg")
 Gun = NodePath("Revolver")
+ChargeInterval = NodePath("ChargeInterval")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=831062429]
 scale = Vector2(0.5, 0.5)
@@ -29,6 +30,8 @@ shape = SubResource("CapsuleShape2D_onrkg")
 shape = SubResource("CircleShape2D_i3pqv")
 
 [node name="Revolver" parent="." unique_id=1662332232 instance=ExtResource("3_i3pqv")]
+
+[node name="ChargeInterval" type="Timer" parent="." unique_id=1776902985]
 
 [connection signal="mouse_entered" from="HolsterBox" to="." method="_on_holster_box_mouse_entered"]
 [connection signal="mouse_exited" from="HolsterBox" to="." method="_on_holster_box_mouse_exited"]
