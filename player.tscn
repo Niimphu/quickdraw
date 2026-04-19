@@ -32,6 +32,7 @@ shape = SubResource("CircleShape2D_i3pqv")
 [node name="Revolver" parent="." unique_id=1662332232 instance=ExtResource("3_i3pqv")]
 
 [node name="ChargeInterval" type="Timer" parent="." unique_id=1776902985]
+wait_time = 0.5
 
 [connection signal="mouse_entered" from="HolsterBox" to="." method="_on_holster_box_mouse_entered"]
 [connection signal="mouse_exited" from="HolsterBox" to="." method="_on_holster_box_mouse_exited"]

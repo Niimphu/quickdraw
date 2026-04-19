@@ -47,6 +47,8 @@ func change_accuracy_modifier(amount: float) -> void:
 func shoot_gun() -> void:
 	var ignore_delay: bool = charged_bullets
 	if Gun.shoot(global_position, get_bullet_direction(), ignore_delay) == 0:
+		if charged_bullets:
+			charged_bullets -= 1
 		#shooting animation
 		pass
 

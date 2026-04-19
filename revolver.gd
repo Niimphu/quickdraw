@@ -20,7 +20,7 @@ func shoot(bullet_position: Vector2, direction: Vector2, ignore_delay: bool = fa
 	
 	if not ignore_delay:
 		FireDelay.start()
-	shooting = true
+		shooting = true
 	spawn_bullet(bullet_position, direction)
 	ammo -= 1
 	
