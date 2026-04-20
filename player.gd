@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var Gun: Node2D
 @export var ChargeInterval: Timer
+@export var FocusFireWindow: Timer
 @export var move_speed := 300
 
 var direction := Vector2.ZERO
@@ -18,6 +19,7 @@ var charged_bullets := 0
 
 func _ready() -> void:
 	ChargeInterval.timeout.connect(_on_charge_interval_timeout)
+	FocusFireWindow.timeout.connect(_on_focus_fire_window_timeout)
 
 
 func _physics_process(_delta: float) -> void:
@@ -71,20 +73,19 @@ func get_bullet_direction() -> Vector2:
 
 func _on_holster_box_mouse_entered() -> void:
 	holstered = true
-	speed = move_speed * 0.25
 	ChargeInterval.start()
 
 
 func _on_holster_box_mouse_exited() -> void:
 	holstered = false
-	speed = move_speed
 	ChargeInterval.stop()
-	focused = false
+	FocusFireWindow.start()
 
 
 func _on_charge_interval_timeout() -> void:
 	if not focused:
 		focused = true
+		speed = move_speed * 0.25
 	elif focus_level < Gun.max_ammo:
 		if focus_level < Gun.ammo:
 			charged_bullets += 1
@@ -93,3 +94,9 @@ func _on_charge_interval_timeout() -> void:
 		if charged_bullets == Gun.max_ammo:
 			#indicate fully focused
 			pass
+
+
+func _on_focus_fire_window_timeout() -> void:
+	focused = false
+	speed = move_speed
+	charged_bullets = 0
