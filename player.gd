@@ -47,8 +47,11 @@ func change_accuracy_modifier(amount: float) -> void:
 func shoot_gun() -> void:
 	var ignore_delay: bool = charged_bullets
 	if Gun.shoot(global_position, get_bullet_direction(), ignore_delay) == 0:
-		if charged_bullets:
+		if charged_bullets > 0:
 			charged_bullets -= 1
+			if charged_bullets == 0:
+				accuracy_modifier = 1
+				change_accuracy_modifier(0)
 		#shooting animation
 		pass
 
@@ -76,16 +79,14 @@ func _on_holster_box_mouse_exited() -> void:
 	speed = move_speed
 	ChargeInterval.stop()
 	focused = false
-	accuracy_modifier = 1
-	change_accuracy_modifier(0)
 
 
 func _on_charge_interval_timeout() -> void:
 	if not focused:
 		focused = true
-	elif charged_bullets < Gun.max_ammo:
-		change_accuracy_modifier(-0.1)
+	elif charged_bullets < Gun.ammo:
 		charged_bullets += 1
+		change_accuracy_modifier(-0.1)
 		if charged_bullets == Gun.max_ammo:
 			#indicate fully focused
 			pass
