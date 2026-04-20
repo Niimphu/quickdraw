@@ -12,6 +12,7 @@ var min_accuracy_modifier := 0.5
 var holstered := false
 
 var focused := false
+var focus_level := 0
 var charged_bullets := 0
 
 
@@ -84,9 +85,11 @@ func _on_holster_box_mouse_exited() -> void:
 func _on_charge_interval_timeout() -> void:
 	if not focused:
 		focused = true
-	elif charged_bullets < Gun.ammo:
-		charged_bullets += 1
-		change_accuracy_modifier(-0.1)
+	elif focus_level < Gun.max_ammo:
+		if focus_level < Gun.ammo:
+			charged_bullets += 1
+		if charged_bullets < Gun.max_ammo:
+			change_accuracy_modifier(-0.1)
 		if charged_bullets == Gun.max_ammo:
 			#indicate fully focused
 			pass
