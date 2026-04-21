@@ -2,10 +2,15 @@
 
 [ext_resource type="Script" uid="uid://bcjvff6gjvwgw" path="res://revolver.gd" id="1_wulko"]
 
-[node name="Revolver" type="Node2D" unique_id=1662332232 node_paths=PackedStringArray("FireDelay")]
+[node name="Revolver" type="Node2D" unique_id=1662332232 node_paths=PackedStringArray("FireDelay", "ReloadDelay")]
 script = ExtResource("1_wulko")
 FireDelay = NodePath("FireDelay")
+ReloadDelay = NodePath("ReloadDelay")
 
 [node name="FireDelay" type="Timer" parent="." unique_id=994089087]
 wait_time = 0.6
+one_shot = true
+
+[node name="ReloadDelay" type="Timer" parent="." unique_id=111426483]
+wait_time = 0.1
 one_shot = true

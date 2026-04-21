@@ -33,7 +33,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot") and not holstered:
 		shoot_gun()
 	if event.is_action_pressed("reload"):
-		Gun.reload()
+		reload_gun()
 	if event.is_action_pressed("scroll_up"):
 		change_accuracy_modifier(-0.2)
 	if event.is_action_pressed("scroll_down"):
@@ -56,6 +56,13 @@ func shoot_gun() -> void:
 				accuracy_modifier = 1
 				change_accuracy_modifier(0)
 		#shooting animation
+		pass
+
+
+func reload_gun() -> void:
+	#reload animation
+	if Gun.reload() == 0:
+		#update
 		pass
 
 
