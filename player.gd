@@ -32,7 +32,7 @@ func _physics_process(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot") and not holstered:
 		shoot_gun()
-	if event.is_action_pressed("reload"):
+	if event.is_action_pressed("reload") and not holstered:
 		reload_gun()
 	if event.is_action_pressed("scroll_up"):
 		change_accuracy_modifier(-0.2)
@@ -53,8 +53,7 @@ func shoot_gun() -> void:
 		if charged_bullets > 0:
 			charged_bullets -= 1
 			if charged_bullets == 0:
-				accuracy_modifier = 1
-				change_accuracy_modifier(0)
+				_on_focus_fire_window_timeout()
 		#shooting animation
 		pass
 
@@ -79,6 +78,8 @@ func get_bullet_direction() -> Vector2:
 
 
 func _on_holster_box_mouse_entered() -> void:
+	if Gun.ammo < 1:
+		return
 	holstered = true
 	ChargeInterval.start()
 
@@ -108,3 +109,5 @@ func _on_focus_fire_window_timeout() -> void:
 	focused = false
 	speed = move_speed
 	charged_bullets = 0
+	accuracy_modifier = 1
+	change_accuracy_modifier(0)
