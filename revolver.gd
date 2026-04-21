@@ -3,7 +3,7 @@ extends Node2D
 @export var FireDelay: Timer
 @export var ReloadDelay: Timer
 @export var firing_delay := 0.3
-@export var reload_delay := 0.1
+@export var reload_delay := 0.2
 @export var max_ammo := 6
 
 var bullet_scene := preload("res://bullet.tscn")
@@ -43,6 +43,10 @@ func spawn_bullet(bullet_position: Vector2, direction: Vector2):
 
 func reload() -> void:
 	ReloadDelay.start()
+
+
+func cancel_reload() -> void:
+	ReloadDelay.stop()
 
 
 func _on_fire_delay_timeout() -> void:

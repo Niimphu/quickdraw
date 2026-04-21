@@ -93,6 +93,7 @@ func _on_charge_interval_timeout() -> void:
 	if not focused:
 		focused = true
 		speed = move_speed * 0.25
+		Gun.cancel_reload()
 	elif focus_level < Gun.max_ammo:
 		if focus_level < Gun.ammo:
 			charged_bullets += 1
