@@ -28,6 +28,7 @@ func shoot(bullet_position: Vector2, direction: Vector2, ignore_delay: bool = fa
 		shooting = true
 	spawn_bullet(bullet_position, direction)
 	ammo -= 1
+	EventBus.ammo_changed.emit(ammo)
 	
 	return 0
 
@@ -51,5 +52,6 @@ func _on_fire_delay_timeout() -> void:
 func _on_reload_delay_timeout() -> void:
 	if ammo < max_ammo:
 		ammo += 1
+		EventBus.ammo_changed.emit(ammo)
 		if ammo < max_ammo:
 			ReloadDelay.start()
