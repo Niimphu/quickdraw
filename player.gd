@@ -44,6 +44,8 @@ func _input(event: InputEvent) -> void:
 
 
 func update_accuracy() -> void:
+	if focused:
+		return
 	var player_to_mouse = get_global_mouse_position() - global_position
 	var distance := player_to_mouse.length()
 	var accuracy := base_accuracy #calculate
@@ -65,6 +67,7 @@ func shoot_gun() -> void:
 		if charged_bullets > 0:
 			charged_bullets -= 1
 			if charged_bullets == 0:
+				print("nice")
 				_on_focus_fire_window_timeout()
 		#shooting animation
 		pass
@@ -106,11 +109,11 @@ func _on_charge_interval_timeout() -> void:
 	if not focused:
 		focused = true
 		speed = move_speed * 0.25
-	elif focus_level < Gun.max_ammo:
-		if focus_level < Gun.ammo:
+	elif charged_bullets < Gun.max_ammo:
+		if charged_bullets < Gun.ammo:
 			charged_bullets += 1
-		if charged_bullets < Gun.max_ammo:
-			change_accuracy_modifier(-0.1)
+		#if charged_bullets < Gun.max_ammo:
+			#change_accuracy_modifier(-0.1)wd
 		if charged_bullets == Gun.max_ammo:
 			#indicate fully focused
 			pass
@@ -118,7 +121,8 @@ func _on_charge_interval_timeout() -> void:
 
 func _on_focus_fire_window_timeout() -> void:
 	focused = false
+	update_accuracy()
 	speed = move_speed
 	charged_bullets = 0
 	accuracy_modifier = 1
-	change_accuracy_modifier(0)
+	#change_accuracy_modifier(0)
