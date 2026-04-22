@@ -7,9 +7,10 @@ extends CharacterBody2D
 
 var direction := Vector2.ZERO
 var speed := move_speed
-var accuracy := 11
 var accuracy_modifier := 1.0
+var reticle_radius := 1
 var min_accuracy_modifier := 0.5
+var base_accuracy := deg_to_rad(5)
 var holstered := false
 
 var focused := false
@@ -38,13 +39,24 @@ func _input(event: InputEvent) -> void:
 		change_accuracy_modifier(-0.2)
 	if event.is_action_pressed("scroll_down"):
 		change_accuracy_modifier(0.2)
+	if event is InputEventMouseMotion:
+		update_accuracy()
+
+
+func update_accuracy() -> void:
+	var player_to_mouse = get_global_mouse_position() - global_position
+	var distance := player_to_mouse.length()
+	var accuracy := base_accuracy #calculate
+	reticle_radius = distance * sin(accuracy / 2.0)
+	
+	EventBus.accuracy_changed.emit(reticle_radius)
 
 
 func change_accuracy_modifier(amount: float) -> void:
 	accuracy_modifier += amount
 	if accuracy_modifier < 0.5:
 		accuracy_modifier = 0.5
-	EventBus.accuracy_modifier_changed.emit(accuracy_modifier)
+	EventBus.accuracy_changed.emit(accuracy_modifier)
 
 
 func shoot_gun() -> void:
@@ -67,10 +79,9 @@ func reload_gun() -> void:
 
 func get_bullet_direction() -> Vector2:
 	var center := get_global_mouse_position()
-	var radius := accuracy * accuracy_modifier
 
 	var angle := randf() * TAU
-	var r := sqrt(randf()) * radius
+	var r := sqrt(randf()) * reticle_radius
 
 	var offset := Vector2(cos(angle), sin(angle)) * r
 
