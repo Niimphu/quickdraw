@@ -16,6 +16,8 @@ Player = NodePath("Player")
 position = Vector2(613, 127)
 texture = ExtResource("2_ykrsh")
 
+[node name="Bullets" type="Node2D" parent="." unique_id=1356707722]
+
 [node name="Player" parent="." unique_id=1997606648 instance=ExtResource("1_37kl0")]
 position = Vector2(598, 340)
 

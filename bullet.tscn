@@ -3,8 +3,25 @@
 [ext_resource type="Texture2D" uid="uid://xd4oc74q6goh" path="res://img/bulet.png" id="1_v7oki"]
 [ext_resource type="Script" uid="uid://64fqlkca4r4p" path="res://bullet.gd" id="1_v8qja"]
 
-[node name="Bullet" type="Node2D" unique_id=1929935182]
+[sub_resource type="Curve" id="Curve_v8qja"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_t4vbm"]
+offsets = PackedFloat32Array(0, 0.19753087, 1)
+colors = PackedColorArray(0.86, 0, 0, 0.09411765, 0.89, 0.17800003, 0, 0.77254903, 1, 0.9333334, 0, 1)
+
+[node name="Bullet" type="Node2D" unique_id=1929935182 node_paths=PackedStringArray("Trail")]
 script = ExtResource("1_v8qja")
+Trail = NodePath("Trail")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1847800700]
 texture = ExtResource("1_v7oki")
+
+[node name="Trail" type="Line2D" parent="." unique_id=480383130]
+points = PackedVector2Array(0, -171, 0, 1)
+width = 3.0
+width_curve = SubResource("Curve_v8qja")
+gradient = SubResource("Gradient_t4vbm")
+begin_cap_mode = 2
+antialiased = true

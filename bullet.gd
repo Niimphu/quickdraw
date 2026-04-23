@@ -1,5 +1,6 @@
 extends Node2D
 
+@export var Trail: Line2D
 var velocity: Vector2
 var prev_position: Vector2
 
@@ -22,6 +23,7 @@ func set_lifetime():
 
 func _physics_process(delta: float) -> void:
 	var new_position = global_position + velocity * delta
+	Trail.add_point(Trail.to_local(new_position))
 
 	#var space_state = get_world_2d().direct_space_state
 	#var query = PhysicsRayQueryParameters2D.create(prev_position, new_position)
