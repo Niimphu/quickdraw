@@ -13,7 +13,8 @@ script = ExtResource("1_8uh7m")
 Player = NodePath("Player")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=332655151]
-position = Vector2(613, 127)
+position = Vector2(703, 351)
+scale = Vector2(2, 2)
 texture = ExtResource("2_ykrsh")
 
 [node name="Bullets" type="Node2D" parent="." unique_id=1356707722]
