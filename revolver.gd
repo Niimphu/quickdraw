@@ -42,7 +42,8 @@ func spawn_bullet(bullet_position: Vector2, direction: Vector2):
 
 
 func reload() -> void:
-	ReloadDelay.start()
+	if ReloadDelay.is_stopped():
+		ReloadDelay.start()
 
 
 func cancel_reload() -> void:
