@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var Gun: Node2D
 @export var ChargeInterval: Timer
 @export var FocusFireWindow: Timer
+@export var RollCooldown: Timer
+@export var RollTime: Timer
 @export var move_speed := 300
 
 var direction := Vector2.ZERO
@@ -12,6 +14,8 @@ var reticle_radius := 1
 var min_accuracy_modifier := 0.5
 var base_accuracy := deg_to_rad(5)
 var holstered := false
+var rolling := false
+var roll_speed := 1000
 
 var focused := false
 var focus_level := 0
@@ -21,11 +25,15 @@ var charged_bullets := 0
 func _ready() -> void:
 	ChargeInterval.timeout.connect(_on_charge_interval_timeout)
 	FocusFireWindow.timeout.connect(_on_focus_fire_window_timeout)
+	RollTime.timeout.connect(_on_roll_time_timeout)
 
 
 func _physics_process(_delta: float) -> void:
-	direction = Input.get_vector("left", "right", "up", "down")
-	velocity = direction * speed
+	if rolling:
+		velocity = direction * roll_speed
+	else:
+		direction = Input.get_vector("left", "right", "up", "down")
+		velocity = direction * speed
 	
 	move_and_slide()
 
@@ -35,6 +43,8 @@ func _input(event: InputEvent) -> void:
 		shoot_gun()
 	if event.is_action_pressed("reload") and not holstered:
 		reload_gun()
+	if event.is_action_pressed("roll"):
+		roll()
 	if event.is_action_pressed("scroll_up"):
 		change_accuracy_modifier(-0.2)
 	if event.is_action_pressed("scroll_down"):
@@ -89,6 +99,20 @@ func get_bullet_direction() -> Vector2:
 	var offset := Vector2(cos(angle), sin(angle)) * r
 
 	return center + offset - global_position
+
+
+func roll() -> void:
+	if not RollCooldown.is_stopped():
+		return
+	_on_holster_box_mouse_exited()
+	direction = Input.get_vector("left", "right", "up", "down")
+	rolling = true
+	RollTime.start()
+
+
+func _on_roll_time_timeout() -> void:
+	rolling = false
+	RollCooldown.start()
 
 
 func _on_holster_box_mouse_entered() -> void:

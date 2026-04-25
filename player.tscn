@@ -10,11 +10,13 @@ height = 40.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_i3pqv"]
 radius = 33.13608
 
-[node name="Player" type="CharacterBody2D" unique_id=1997606648 node_paths=PackedStringArray("Gun", "ChargeInterval", "FocusFireWindow")]
+[node name="Player" type="CharacterBody2D" unique_id=1997606648 node_paths=PackedStringArray("Gun", "ChargeInterval", "FocusFireWindow", "RollCooldown", "RollTime")]
 script = ExtResource("1_onrkg")
 Gun = NodePath("Revolver")
-ChargeInterval = NodePath("ChargeInterval")
-FocusFireWindow = NodePath("FocusFireWindow")
+ChargeInterval = NodePath("Timers/ChargeInterval")
+FocusFireWindow = NodePath("Timers/FocusFireWindow")
+RollCooldown = NodePath("Timers/RollCooldown")
+RollTime = NodePath("Timers/RollTime")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=831062429]
 scale = Vector2(0.5, 0.5)
@@ -32,11 +34,21 @@ shape = SubResource("CircleShape2D_i3pqv")
 
 [node name="Revolver" parent="." unique_id=1662332232 instance=ExtResource("3_i3pqv")]
 
-[node name="ChargeInterval" type="Timer" parent="." unique_id=1776902985]
+[node name="Timers" type="Node2D" parent="." unique_id=1403478543]
+
+[node name="ChargeInterval" type="Timer" parent="Timers" unique_id=1776902985]
 wait_time = 0.5
 
-[node name="FocusFireWindow" type="Timer" parent="." unique_id=1940774851]
+[node name="FocusFireWindow" type="Timer" parent="Timers" unique_id=1940774851]
 wait_time = 2.0
+one_shot = true
+
+[node name="RollCooldown" type="Timer" parent="Timers" unique_id=1937254112]
+wait_time = 0.5
+one_shot = true
+
+[node name="RollTime" type="Timer" parent="Timers" unique_id=1115509557]
+wait_time = 0.2
 one_shot = true
 
 [connection signal="mouse_entered" from="HolsterBox" to="." method="_on_holster_box_mouse_entered"]
