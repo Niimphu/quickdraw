@@ -80,7 +80,6 @@ func shoot_gun() -> void:
 		if charged_bullets > 0:
 			charged_bullets -= 1
 			if charged_bullets == 0:
-				print("nice")
 				_on_focus_fire_window_timeout()
 		#shooting animation
 		pass
