@@ -85,6 +85,8 @@ func shoot_gun() -> void:
 
 func reload_gun() -> void:
 	#reload animation
+	if rolling:
+		return
 	if Gun.reload() == 0:
 		#update
 		pass
@@ -105,6 +107,7 @@ func roll() -> void:
 	if not RollCooldown.is_stopped():
 		return
 	_on_holster_box_mouse_exited()
+	Gun.cancel_reload()
 	direction = Input.get_vector("left", "right", "up", "down")
 	rolling = true
 	RollTime.start()
