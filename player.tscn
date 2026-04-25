@@ -10,13 +10,15 @@ height = 40.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_i3pqv"]
 radius = 33.13608
 
-[node name="Player" type="CharacterBody2D" unique_id=1997606648 node_paths=PackedStringArray("Gun", "ChargeInterval", "FocusFireWindow", "RollCooldown", "RollTime")]
+[node name="Player" type="CharacterBody2D" unique_id=1997606648 node_paths=PackedStringArray("Gun", "ChargeInterval", "FocusFireWindow", "RollCooldown", "RollTime", "Sprite")]
+motion_mode = 1
 script = ExtResource("1_onrkg")
 Gun = NodePath("Revolver")
 ChargeInterval = NodePath("Timers/ChargeInterval")
 FocusFireWindow = NodePath("Timers/FocusFireWindow")
 RollCooldown = NodePath("Timers/RollCooldown")
 RollTime = NodePath("Timers/RollTime")
+Sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=831062429]
 scale = Vector2(0.5, 0.5)

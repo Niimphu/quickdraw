@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var RollCooldown: Timer
 @export var RollTime: Timer
 @export var move_speed := 300
+@export var Sprite : Sprite2D
 
 var direction := Vector2.ZERO
 var speed := move_speed
@@ -111,6 +112,20 @@ func roll() -> void:
 	direction = Input.get_vector("left", "right", "up", "down")
 	rolling = true
 	RollTime.start()
+	
+	var tween := get_tree().create_tween()
+	var roll_direction: int
+	if direction.x > 0:
+		roll_direction = 360
+	elif direction.x < 0:
+		roll_direction = -360
+	elif get_global_mouse_position().x - global_position.x > 0:
+		roll_direction = 360
+	else:
+		roll_direction = -360
+	tween.tween_property(Sprite, "rotation_degrees", roll_direction, 0.2)
+	await tween.finished
+	Sprite.rotation = 0
 
 
 func _on_roll_time_timeout() -> void:
