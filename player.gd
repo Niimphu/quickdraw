@@ -73,6 +73,8 @@ func change_accuracy_modifier(amount: float) -> void:
 
 
 func shoot_gun() -> void:
+	if rolling:
+		return
 	var ignore_delay: bool = charged_bullets
 	if Gun.shoot(global_position, get_bullet_direction(), ignore_delay) == 0:
 		if charged_bullets > 0:
@@ -114,7 +116,7 @@ func roll() -> void:
 	RollTime.start()
 	
 	var tween := get_tree().create_tween()
-	var roll_direction: int
+	var roll_direction := direction.x
 	if direction.x > 0:
 		roll_direction = 360
 	elif direction.x < 0:
@@ -123,7 +125,7 @@ func roll() -> void:
 		roll_direction = 360
 	else:
 		roll_direction = -360
-	tween.tween_property(Sprite, "rotation_degrees", roll_direction, 0.2)
+	tween.tween_property(Sprite, "rotation_degrees", roll_direction, 0.15)
 	await tween.finished
 	Sprite.rotation = 0
 
