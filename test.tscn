@@ -58,19 +58,22 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="AmmoIndicator" type="TextureProgressBar" parent="UI/MarginContainer" unique_id=610053201]
+[node name="AmmoIndicator" type="TextureProgressBar" parent="UI/MarginContainer" unique_id=610053201 node_paths=PackedStringArray("MaskBar", "ChargedBullets")]
 layout_mode = 2
 max_value = 6.0
 value = 6.0
 rounded = true
 texture_progress = ExtResource("6_g14j6")
 script = ExtResource("7_vbegm")
+MaskBar = NodePath("MaskBar")
+ChargedBullets = NodePath("MaskBar/ChargedBullets")
 
-[node name="ProgressBar" type="ProgressBar" parent="UI/MarginContainer/AmmoIndicator" unique_id=643634311]
+[node name="MaskBar" type="ProgressBar" parent="UI/MarginContainer/AmmoIndicator" unique_id=643634311]
 clip_children = 1
 layout_mode = 0
 offset_right = 294.5
 offset_bottom = 56.5
+mouse_filter = 1
 theme_override_styles/background = SubResource("StyleBoxFlat_xersf")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ehkex")
 max_value = 6.0
@@ -78,12 +81,11 @@ step = 1.0
 value = 6.0
 rounded = true
 
-[node name="ChargedBullets" type="TextureProgressBar" parent="UI/MarginContainer/AmmoIndicator/ProgressBar" unique_id=888424943]
+[node name="ChargedBullets" type="TextureProgressBar" parent="UI/MarginContainer/AmmoIndicator/MaskBar" unique_id=888424943]
 layout_mode = 0
 offset_right = 2273.0
 offset_bottom = 1263.0
 max_value = 6.0
-value = 6.0
 rounded = true
 fill_mode = 1
 texture_progress = ExtResource("8_ehkex")

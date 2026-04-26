@@ -156,6 +156,7 @@ func _on_charge_interval_timeout() -> void:
 	elif charged_bullets < Gun.max_ammo:
 		if charged_bullets < Gun.ammo:
 			charged_bullets += 1
+			EventBus.charged_bullet.emit(charged_bullets)
 		#if charged_bullets < Gun.max_ammo:
 			#change_accuracy_modifier(-0.1)wd
 		if charged_bullets == Gun.max_ammo:
@@ -168,5 +169,6 @@ func _on_focus_fire_window_timeout() -> void:
 	update_accuracy()
 	speed = move_speed
 	charged_bullets = 0
+	EventBus.charged_bullet.emit(charged_bullets)
 	accuracy_modifier = 1
 	#change_accuracy_modifier(0)
