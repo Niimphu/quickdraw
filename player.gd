@@ -20,6 +20,7 @@ var roll_speed := 1000
 
 var focused := false
 var focus_level := 0
+var focus_walk_speed_modifier := 0.4
 var charged_bullets := 0
 
 
@@ -46,10 +47,10 @@ func _input(event: InputEvent) -> void:
 		reload_gun()
 	if event.is_action_pressed("roll"):
 		roll()
-	if event.is_action_pressed("scroll_up"):
-		change_accuracy_modifier(-0.2)
-	if event.is_action_pressed("scroll_down"):
-		change_accuracy_modifier(0.2)
+	#if event.is_action_pressed("scroll_up"):
+		#change_accuracy_modifier(-0.2)
+	#if event.is_action_pressed("scroll_down"):
+		#change_accuracy_modifier(0.2)
 	if event is InputEventMouseMotion:
 		update_accuracy()
 
@@ -151,7 +152,7 @@ func _on_holster_box_mouse_exited() -> void:
 func _on_charge_interval_timeout() -> void:
 	if not focused:
 		focused = true
-		speed = move_speed * 0.25
+		speed = move_speed * focus_walk_speed_modifier
 	elif charged_bullets < Gun.max_ammo:
 		if charged_bullets < Gun.ammo:
 			charged_bullets += 1
