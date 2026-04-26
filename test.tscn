@@ -7,6 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://dqbed8pguq8tx" path="res://img/mscrosshair.png" id="5_g14j6"]
 [ext_resource type="Texture2D" uid="uid://cpbl3texjivsh" path="res://img/bulets.png" id="6_g14j6"]
 [ext_resource type="Script" uid="uid://ceh2c7hpq2i45" path="res://ammo_indicator.gd" id="7_vbegm"]
+[ext_resource type="Texture2D" uid="uid://eb3ei1rl70a0" path="res://img/chargedbulets.png" id="8_ehkex"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xersf"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehkex"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="Node2D" type="Node2D" unique_id=2020725657 node_paths=PackedStringArray("Player")]
 script = ExtResource("1_8uh7m")
@@ -46,6 +53,10 @@ offset_right = 1153.0
 offset_bottom = 647.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
 [node name="AmmoIndicator" type="TextureProgressBar" parent="UI/MarginContainer" unique_id=610053201]
 layout_mode = 2
@@ -54,3 +65,25 @@ value = 6.0
 rounded = true
 texture_progress = ExtResource("6_g14j6")
 script = ExtResource("7_vbegm")
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/MarginContainer/AmmoIndicator" unique_id=643634311]
+clip_children = 1
+layout_mode = 0
+offset_right = 294.5
+offset_bottom = 56.5
+theme_override_styles/background = SubResource("StyleBoxFlat_xersf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ehkex")
+max_value = 6.0
+step = 1.0
+value = 6.0
+rounded = true
+
+[node name="ChargedBullets" type="TextureProgressBar" parent="UI/MarginContainer/AmmoIndicator/ProgressBar" unique_id=888424943]
+layout_mode = 0
+offset_right = 2273.0
+offset_bottom = 1263.0
+max_value = 6.0
+value = 6.0
+rounded = true
+fill_mode = 1
+texture_progress = ExtResource("8_ehkex")
