@@ -74,14 +74,17 @@ func change_accuracy_modifier(amount: float) -> void:
 
 
 func shoot_gun() -> void:
-	if rolling:
+	if rolling or holstered:
 		return
 	var ignore_delay: bool = charged_bullets > 1
 	if Gun.shoot(global_position, get_bullet_direction(), ignore_delay) == 0:
+		Gun.cancel_reload()
 		if charged_bullets > 0:
 			charged_bullets -= 1
 			if charged_bullets == 0:
 				_on_focus_fire_window_timeout()
+				if Gun.ammo == 0:
+					reload_gun()
 		#shooting animation
 		pass
 
