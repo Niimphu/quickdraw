@@ -88,7 +88,7 @@ func shoot_gun() -> void:
 
 func reload_gun() -> void:
 	#reload animation
-	if rolling:
+	if rolling or holstered:
 		return
 	if Gun.reload() == 0:
 		#update
