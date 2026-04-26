@@ -8,7 +8,7 @@ FireDelay = NodePath("FireDelay")
 ReloadDelay = NodePath("ReloadDelay")
 
 [node name="FireDelay" type="Timer" parent="." unique_id=994089087]
-wait_time = 0.6
+wait_time = 0.5
 one_shot = true
 
 [node name="ReloadDelay" type="Timer" parent="." unique_id=111426483]
