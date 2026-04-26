@@ -136,7 +136,7 @@ func _on_roll_time_timeout() -> void:
 
 
 func _on_holster_box_mouse_entered() -> void:
-	if Gun.ammo < 1 or charged_bullets > 1:
+	if Gun.ammo < 1 or charged_bullets > 0:
 		return
 	Gun.cancel_reload()
 	holstered = true
