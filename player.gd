@@ -9,7 +9,7 @@ extends CharacterBody2D
 @export var Sprite : Sprite2D
 
 var direction := Vector2.ZERO
-var speed := move_speed
+var speed: float = move_speed
 var accuracy_modifier := 1.0
 var reticle_radius := 1
 var min_accuracy_modifier := 0.5
@@ -61,7 +61,7 @@ func update_accuracy() -> void:
 	var player_to_mouse = get_global_mouse_position() - global_position
 	var distance := player_to_mouse.length()
 	var accuracy := base_accuracy #calculate
-	reticle_radius = distance * sin(accuracy / 2.0)
+	reticle_radius = int(distance * sin(accuracy / 2.0))
 	
 	EventBus.accuracy_changed.emit(reticle_radius)
 

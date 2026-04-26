@@ -4,7 +4,7 @@ var current_tween: Tween
 
 var centre_dot = load("res://img/centredot.png")
 func _ready():
-	Input.set_custom_mouse_cursor(centre_dot, 0, Vector2(4, 4))
+	Input.set_custom_mouse_cursor(centre_dot, Input.CURSOR_ARROW, Vector2(4, 4))
 	EventBus.accuracy_changed.connect(_on_accuracy_changed)
 
 
