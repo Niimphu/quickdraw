@@ -62,6 +62,6 @@ func _on_fire_delay_timeout() -> void:
 
 func _on_reload_delay_timeout() -> void:
 	if ammo < max_ammo:
-		change_ammo(-1)
+		change_ammo(1)
 		if ammo < max_ammo:
 			ReloadDelay.start()
