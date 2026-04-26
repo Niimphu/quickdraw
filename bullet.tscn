@@ -10,7 +10,7 @@ point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_t4vbm"]
 offsets = PackedFloat32Array(0, 0.19753087, 1)
-colors = PackedColorArray(0.86, 0, 0, 0.35686275, 0.89, 0.17800003, 0, 0.4117647, 1, 0.9333334, 0, 0.7529412)
+colors = PackedColorArray(0.86, 0.688, 0.688, 0.35686275, 0.89, 0.57672, 0.4984, 0.4117647, 1, 0.96000004, 0.39999998, 0.7529412)
 
 [node name="Bullet" type="Node2D" unique_id=1929935182 node_paths=PackedStringArray("Trail")]
 script = ExtResource("1_v8qja")
