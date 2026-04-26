@@ -76,7 +76,7 @@ func change_accuracy_modifier(amount: float) -> void:
 func shoot_gun() -> void:
 	if rolling:
 		return
-	var ignore_delay: bool = charged_bullets
+	var ignore_delay: bool = charged_bullets > 1
 	if Gun.shoot(global_position, get_bullet_direction(), ignore_delay) == 0:
 		if charged_bullets > 0:
 			charged_bullets -= 1
