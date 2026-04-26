@@ -80,7 +80,7 @@ func shoot_gun() -> void:
 	if Gun.shoot(global_position, get_bullet_direction(), ignore_delay) == 0:
 		Gun.cancel_reload()
 		if charged_bullets > 0:
-			charged_bullets -= 1
+			change_charged_bullets(-1)
 			if charged_bullets == 0:
 				_on_focus_fire_window_timeout()
 				if Gun.ammo == 0:
@@ -158,20 +158,24 @@ func _on_charge_interval_timeout() -> void:
 		speed = move_speed * focus_walk_speed_modifier
 	elif charged_bullets < Gun.max_ammo:
 		if charged_bullets < Gun.ammo:
-			charged_bullets += 1
-			EventBus.charged_bullet.emit(charged_bullets)
-		#if charged_bullets < Gun.max_ammo:
-			#change_accuracy_modifier(-0.1)wd
+			change_charged_bullets(1)
 		if charged_bullets == Gun.max_ammo:
 			#indicate fully focused
 			pass
+
+
+func change_charged_bullets(amount: int) -> void:
+	if amount == 0:
+		charged_bullets = 0
+	else:
+		charged_bullets += amount
+	EventBus.charged_bullet.emit(charged_bullets)
 
 
 func _on_focus_fire_window_timeout() -> void:
 	focused = false
 	update_accuracy()
 	speed = move_speed
-	charged_bullets = 0
-	EventBus.charged_bullet.emit(charged_bullets)
+	change_charged_bullets(0)
 	accuracy_modifier = 1
 	#change_accuracy_modifier(0)
