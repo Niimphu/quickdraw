@@ -3,7 +3,7 @@ extends Node2D
 @export var FireDelay: Timer
 @export var ReloadDelay: Timer
 @export var firing_delay := 0.3
-@export var reload_delay := 0.2
+@export var reload_delay := 0.25
 @export var max_ammo := 6
 
 var bullet_scene := preload("res://bullet.tscn")
