@@ -1,26 +1,29 @@
 extends CharacterBody2D
 
+@export_category("Nodes")
 @export var Gun: Node2D
 @export var ChargeInterval: Timer
 @export var FocusFireWindow: Timer
 @export var RollCooldown: Timer
 @export var RollTime: Timer
-@export var move_speed := 300
 @export var Sprite : Sprite2D
 
+@export_category("Stats")
+@export var move_speed: int = 300
+@export var roll_speed: int = 1000
+@export var focus_walk_speed_modifier := 0.4
+@export var base_accuracy_degrees: int = 10
+
+var base_accuracy := deg_to_rad(base_accuracy_degrees)
 var direction := Vector2.ZERO
 var speed: float = move_speed
-var accuracy_modifier := 1.0
 var reticle_radius := 1
-var min_accuracy_modifier := 0.5
-var base_accuracy := deg_to_rad(10)
+
 var holstered := false
 var rolling := false
-var roll_speed := 1000
-
 var focused := false
+
 var focus_level := 0
-var focus_walk_speed_modifier := 0.4
 var charged_bullets := 0
 
 
@@ -47,10 +50,6 @@ func _input(event: InputEvent) -> void:
 		reload_gun()
 	if event.is_action_pressed("roll"):
 		roll()
-	#if event.is_action_pressed("scroll_up"):
-		#change_accuracy_modifier(-0.2)
-	#if event.is_action_pressed("scroll_down"):
-		#change_accuracy_modifier(0.2)
 	if event is InputEventMouseMotion:
 		update_accuracy()
 
@@ -64,13 +63,6 @@ func update_accuracy() -> void:
 	reticle_radius = int(distance * sin(accuracy / 2.0))
 	
 	EventBus.accuracy_changed.emit(reticle_radius)
-
-
-func change_accuracy_modifier(amount: float) -> void:
-	accuracy_modifier += amount
-	if accuracy_modifier < 0.5:
-		accuracy_modifier = 0.5
-	EventBus.accuracy_changed.emit(accuracy_modifier)
 
 
 func shoot_gun() -> void:
@@ -177,5 +169,3 @@ func _on_focus_fire_window_timeout() -> void:
 	update_accuracy()
 	speed = move_speed
 	change_charged_bullets(0)
-	accuracy_modifier = 1
-	#change_accuracy_modifier(0)
