@@ -111,16 +111,11 @@ func roll() -> void:
 	RollTime.start()
 	
 	var tween := get_tree().create_tween()
-	var roll_direction := direction.x
-	if direction.x > 0:
-		roll_direction = 360
-	elif direction.x < 0:
-		roll_direction = -360
-	elif get_global_mouse_position().x - global_position.x > 0:
-		roll_direction = 360
-	else:
-		roll_direction = -360
-	tween.tween_property(Sprite, "rotation_degrees", roll_direction, 0.15)
+	var roll_direction := 1
+	if direction.x == 0 and get_global_mouse_position().x - global_position.x < 0 \
+		or direction.x < 0:
+		roll_direction = -1
+	tween.tween_property(Sprite, "rotation_degrees", 360 * roll_direction, 0.15)
 	await tween.finished
 	Sprite.rotation = 0
 
