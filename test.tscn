@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cpbl3texjivsh" path="res://img/bulets.png" id="6_g14j6"]
 [ext_resource type="Script" uid="uid://ceh2c7hpq2i45" path="res://ammo_indicator.gd" id="7_vbegm"]
 [ext_resource type="Texture2D" uid="uid://eb3ei1rl70a0" path="res://img/chargedbulets.png" id="8_ehkex"]
+[ext_resource type="PackedScene" uid="uid://ld5b2tjycu4m" path="res://enemy.tscn" id="9_xersf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xersf"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -17,7 +18,7 @@ bg_color = Color(0, 0, 0, 1)
 
 [node name="Node2D" type="Node2D" unique_id=2020725657 node_paths=PackedStringArray("Player")]
 script = ExtResource("1_8uh7m")
-Player = NodePath("Player")
+Player = NodePath("Entities/Player")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=332655151]
 modulate = Color(0.54, 0.54, 0.54, 1)
@@ -27,10 +28,16 @@ texture = ExtResource("2_ykrsh")
 
 [node name="Bullets" type="Node2D" parent="." unique_id=1356707722]
 
-[node name="Player" parent="." unique_id=1997606648 instance=ExtResource("1_37kl0")]
+[node name="Entities" type="Node2D" parent="." unique_id=242581932]
+y_sort_enabled = true
+
+[node name="Enemy" parent="Entities" unique_id=1667423067 instance=ExtResource("9_xersf")]
+position = Vector2(499, 320)
+
+[node name="Player" parent="Entities" unique_id=1997606648 instance=ExtResource("1_37kl0")]
 position = Vector2(598, 340)
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=688437104]
+[node name="Camera2D" type="Camera2D" parent="Entities/Player" unique_id=688437104]
 process_callback = 0
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=112645655]

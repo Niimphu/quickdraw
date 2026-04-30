@@ -43,7 +43,7 @@ func spawn_bullet(bullet_position: Vector2, direction: Vector2):
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = bullet_position
 	bullet.rotate(direction.orthogonal().angle())
-	get_parent().get_parent().get_node("Bullets").add_child(bullet)
+	get_parent().get_parent().get_parent().get_node("Bullets").add_child(bullet)
 	bullet.fire(direction, bullet_speed)
 
 

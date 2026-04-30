@@ -5,12 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://dlxbvnabudhlm" path="res://revolver.tscn" id="3_i3pqv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
-height = 40.0
+radius = 8.0
+height = 48.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i3pqv"]
-radius = 33.13608
+radius = 36.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1997606648 node_paths=PackedStringArray("Gun", "ChargeInterval", "FocusFireWindow", "RollCooldown", "RollTime", "Sprite")]
+y_sort_enabled = true
+collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_onrkg")
 Gun = NodePath("Revolver")
@@ -21,15 +24,18 @@ RollTime = NodePath("Timers/RollTime")
 Sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=831062429]
+position = Vector2(0, -21)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_4flbx")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=72738737]
-position = Vector2(0, 21)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_onrkg")
 
 [node name="HolsterBox" type="Area2D" parent="." unique_id=526136077]
+position = Vector2(0, -21)
+collision_layer = 32768
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HolsterBox" unique_id=2106498415]
 shape = SubResource("CircleShape2D_i3pqv")

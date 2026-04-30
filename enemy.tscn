@@ -10,6 +10,7 @@ height = 64.0
 radius = 38.013157
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1667423067]
+y_sort_enabled = true
 collision_layer = 32
 collision_mask = 37
 
