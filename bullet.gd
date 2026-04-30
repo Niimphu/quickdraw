@@ -24,16 +24,16 @@ func set_lifetime():
 func _physics_process(delta: float) -> void:
 	var new_position = global_position + velocity * delta
 
-	#var space_state = get_world_2d().direct_space_state
-	#var query = PhysicsRayQueryParameters2D.create(prev_position, new_position)
-	#query.exclude = [self]
-#
-	#var result = space_state.intersect_ray(query)
-#
-	#if result:
-		##on_hit(result)
-		#queue_free()
-		#return
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsRayQueryParameters2D.create(prev_position, new_position, 1 << 7, [self])
+	query.collide_with_areas = true
+
+	var result = space_state.intersect_ray(query)
+
+	if result:
+		result.collider.get_parent().queue_free()
+		queue_free()
+		return
 
 	global_position = new_position
 	prev_position = new_position
