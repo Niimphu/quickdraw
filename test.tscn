@@ -87,6 +87,7 @@ max_value = 6.0
 step = 1.0
 value = 6.0
 rounded = true
+fill_mode = 1
 
 [node name="ChargedBullets" type="TextureProgressBar" parent="UI/MarginContainer/AmmoIndicator/MaskBar" unique_id=888424943]
 layout_mode = 0
@@ -94,5 +95,4 @@ offset_right = 2273.0
 offset_bottom = 1263.0
 max_value = 6.0
 rounded = true
-fill_mode = 1
 texture_progress = ExtResource("8_ehkex")
