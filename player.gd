@@ -102,13 +102,13 @@ func get_bullet_direction() -> Vector2:
 
 
 func roll() -> void:
-	if not RollCooldown.is_stopped():
+	if not (RollCooldown.is_stopped() and not rolling):
 		return
+	rolling = true
+	RollTime.start()
 	_on_holster_box_mouse_exited()
 	Gun.cancel_reload()
 	direction = Input.get_vector("left", "right", "up", "down")
-	rolling = true
-	RollTime.start()
 	
 	var tween := get_tree().create_tween()
 	var roll_direction := 1
