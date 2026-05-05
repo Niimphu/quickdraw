@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://6fdtcc7jrlf2" path="res://test.gd" id="1_8uh7m"]
 [ext_resource type="PackedScene" uid="uid://smbxj0jasncd" path="res://player.tscn" id="1_37kl0"]
 [ext_resource type="Texture2D" uid="uid://cceklobk62a0n" path="res://img/street.png" id="2_ykrsh"]
+[ext_resource type="Script" uid="uid://be3mrc4o1th8" path="res://enemy_spawner.gd" id="3_00tp4"]
 [ext_resource type="Script" uid="uid://46nn4syi3jif" path="res://reticle.gd" id="4_ykrsh"]
 [ext_resource type="Texture2D" uid="uid://dqbed8pguq8tx" path="res://img/mscrosshair.png" id="5_g14j6"]
 [ext_resource type="Texture2D" uid="uid://cpbl3texjivsh" path="res://img/bulets.png" id="6_g14j6"]
 [ext_resource type="Script" uid="uid://ceh2c7hpq2i45" path="res://ammo_indicator.gd" id="7_vbegm"]
 [ext_resource type="Texture2D" uid="uid://eb3ei1rl70a0" path="res://img/chargedbulets.png" id="8_ehkex"]
-[ext_resource type="PackedScene" uid="uid://ld5b2tjycu4m" path="res://enemy.tscn" id="9_xersf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xersf"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -30,9 +30,7 @@ texture = ExtResource("2_ykrsh")
 
 [node name="Entities" type="Node2D" parent="." unique_id=242581932]
 y_sort_enabled = true
-
-[node name="Enemy" parent="Entities" unique_id=1667423067 instance=ExtResource("9_xersf")]
-position = Vector2(499, 320)
+script = ExtResource("3_00tp4")
 
 [node name="Player" parent="Entities" unique_id=1997606648 instance=ExtResource("1_37kl0")]
 position = Vector2(598, 340)
