@@ -13,6 +13,10 @@ func _ready() -> void:
 
 func spawn_enemy() -> void:
 	var new_enemy := test_enemy.instantiate()
-	var direction := Vector2.RIGHT.rotated(randf_range(0, 2 * PI))
-	new_enemy.global_position = get_node("Player").global_position + (direction * spawn_distance)
+	new_enemy.global_position = get_spawn_location()
 	add_child(new_enemy)
+
+
+func get_spawn_location() -> Vector2:
+	var direction := Vector2.RIGHT.rotated(randf_range(0, 2 * PI))
+	return get_node("Player").global_position + (direction * spawn_distance)
