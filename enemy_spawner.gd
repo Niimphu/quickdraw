@@ -3,6 +3,7 @@ extends Node2D
 @onready var test_enemy := preload("res://enemy.tscn")
 @onready var spawn_timer := Timer.new()
 var spawn_distance := 700
+var id := 1
 
 func _ready() -> void:
 	add_child(spawn_timer)
@@ -15,6 +16,10 @@ func spawn_enemy() -> void:
 	var new_enemy := test_enemy.instantiate()
 	new_enemy.global_position = get_spawn_location()
 	add_child(new_enemy)
+	new_enemy.id = id
+	new_enemy.Player = get_node("Player")
+	new_enemy.set_physics_process(true)
+	id += 1
 
 
 func get_spawn_location() -> Vector2:
