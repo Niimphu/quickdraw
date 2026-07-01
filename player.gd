@@ -7,10 +7,12 @@ extends CharacterBody2D
 @export var RollCooldown: Timer
 @export var RollTime: Timer
 @export var Sprite : Sprite2D
+@export var AnimPlay : AnimationPlayer
+@export var AnimTree : AnimationTree
 
 @export_category("Stats")
-@export var move_speed: int = 300
-@export var roll_speed: int = 1000
+@export var move_speed: int = 80
+@export var roll_speed: int = 300
 @export var focus_walk_speed_modifier := 0.4
 @export var base_accuracy_degrees: int = 10
 
@@ -21,6 +23,7 @@ var reticle_radius := 1
 
 var holstered := false
 var rolling := false
+var walking := false
 var focused := false
 
 var focus_level := 0
@@ -31,6 +34,11 @@ func _ready() -> void:
 	ChargeInterval.timeout.connect(_on_charge_interval_timeout)
 	FocusFireWindow.timeout.connect(_on_focus_fire_window_timeout)
 	RollTime.timeout.connect(_on_roll_time_timeout)
+	AnimTree.active = true
+
+
+func _process(delta: float) -> void:
+	Sprite.flip_h = get_global_mouse_position().x < global_position.x
 
 
 func _physics_process(_delta: float) -> void:
@@ -38,9 +46,15 @@ func _physics_process(_delta: float) -> void:
 		velocity = direction * roll_speed
 	else:
 		direction = Input.get_vector("left", "right", "up", "down")
+		walking = direction != Vector2.ZERO
 		velocity = direction * speed
 	
 	move_and_slide()
+	update_animation_params(direction)
+
+
+func update_animation_params(direction: Vector2) -> void:
+	pass
 
 
 func _input(event: InputEvent) -> void:
@@ -110,6 +124,10 @@ func roll() -> void:
 	Gun.cancel_reload()
 	direction = Input.get_vector("left", "right", "up", "down")
 	
+	play_roll_animation()
+
+
+func play_roll_animation() -> void:
 	var tween := get_tree().create_tween()
 	var roll_direction := 1
 	if direction.x == 0 and get_global_mouse_position().x - global_position.x < 0 \

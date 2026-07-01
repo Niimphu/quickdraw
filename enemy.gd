@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var Player: CharacterBody2D
-var move_speed := 100
+var move_speed := 40
 var id: int
 var time: int = 0
 var direction : Vector2

@@ -19,6 +19,14 @@ config/icon="res://icon.svg"
 
 EventBus="*uid://443dqgiycly5"
 
+[display]
+
+window/size/viewport_width=160
+window/size/viewport_height=90
+window/size/window_width_override=1600
+window/size/window_height_override=900
+window/stretch/mode="canvas_items"
+
 [input]
 
 up={
@@ -75,6 +83,7 @@ common/physics_interpolation=true
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

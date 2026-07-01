@@ -64,6 +64,7 @@ theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
 [node name="AmmoIndicator" type="TextureProgressBar" parent="UI/MarginContainer" unique_id=610053201 node_paths=PackedStringArray("MaskBar", "ChargedBullets")]
+visible = false
 layout_mode = 2
 max_value = 6.0
 value = 6.0
