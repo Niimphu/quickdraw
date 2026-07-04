@@ -7,7 +7,7 @@ extends Node2D
 @export var max_ammo := 6
 
 var bullet_scene := preload("res://bullet.tscn")
-var bullet_speed := 4000
+var bullet_speed := 1000
 var shooting := false
 var ammo := max_ammo
 

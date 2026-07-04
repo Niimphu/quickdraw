@@ -17,11 +17,12 @@ script = ExtResource("1_v8qja")
 Trail = NodePath("Trail")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1847800700]
+visible = false
 texture = ExtResource("1_v7oki")
 
 [node name="Trail" type="Line2D" parent="." unique_id=480383130]
 points = PackedVector2Array(0, 0)
-width = 3.0
+width = 1.0
 width_curve = SubResource("Curve_v8qja")
 gradient = SubResource("Gradient_t4vbm")
 begin_cap_mode = 2
