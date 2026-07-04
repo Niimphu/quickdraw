@@ -25,9 +25,14 @@ var holstered := false
 var rolling := false
 var walking := false
 var focused := false
+var reversing := false
 
 var focus_level := 0
 var charged_bullets := 0
+
+enum ANIM_STATE { IDLE, WALK, RUN, ROLL, DEATH }
+
+@onready var state_machine = AnimTree.get("parameters/playback")
 
 
 func _ready() -> void:
@@ -38,7 +43,11 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	Sprite.flip_h = get_global_mouse_position().x < global_position.x
+	var look_left: bool = get_global_mouse_position().x < global_position.x
+	var walk_left: bool = direction.x < 0
+	
+	Sprite.flip_h = look_left
+	reversing = walk_left != look_left
 
 
 func _physics_process(_delta: float) -> void:
@@ -54,7 +63,13 @@ func _physics_process(_delta: float) -> void:
 
 
 func update_animation_params(direction: Vector2) -> void:
-	pass
+	if focused and direction != Vector2.ZERO:
+		state_machine.travel("walk" if not reversing else "walk_reverse")
+	elif direction != Vector2.ZERO:
+		state_machine.travel("run" if not reversing else "run_reverse")
+	else:
+		state_machine.travel("idle")
+
 
 
 func _input(event: InputEvent) -> void:
