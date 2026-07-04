@@ -1,12 +1,12 @@
 extends Line2D
 
-@export var trail_length := 25
+@export var trail_length := 10
 
 func _ready() -> void:
 	clear_points()
 
 
-func _process(_delta):
+func _physics_process(_delta):
 	global_position = Vector2.ZERO
 	global_rotation = 0
 	

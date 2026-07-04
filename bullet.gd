@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 
 	if result:
 		result.collider.get_parent().queue_free()
-		queue_free()
+		#queue_free()
 		return
 
 	global_position = new_position

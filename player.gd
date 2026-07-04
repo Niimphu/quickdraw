@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var RollTime: Timer
 @export var Sprite : Sprite2D
 @export var HolsteredGunSprite : Sprite2D
+@export var GunSprite : Sprite2D
 @export var AnimPlay : AnimationPlayer
 @export var AnimTree : AnimationTree
 
@@ -28,6 +29,9 @@ var walking := false
 var focused := false
 var reversing := false
 
+var look_left := false
+var walk_left := false
+
 var focus_level := 0
 var charged_bullets := 0
 
@@ -41,6 +45,13 @@ func _ready() -> void:
 	FocusFireWindow.timeout.connect(_on_focus_fire_window_timeout)
 	RollTime.timeout.connect(_on_roll_time_timeout)
 	AnimTree.active = true
+	HolsteredGunSprite.visible = false
+
+
+func _process(delta: float) -> void:
+	GunSprite.look_at(get_global_mouse_position())
+	if look_left:
+		GunSprite.rotate(PI)
 
 
 func _physics_process(_delta: float) -> void:
@@ -56,8 +67,6 @@ func _physics_process(_delta: float) -> void:
 	flippage()
 
 
-var look_left: bool = false
-var walk_left: bool = false
 
 func flippage() -> void:
 	var dead_zone := 0.5
@@ -70,6 +79,7 @@ func flippage() -> void:
 	
 	Sprite.flip_h = look_left
 	HolsteredGunSprite.flip_h = look_left
+	GunSprite.flip_h = look_left
 
 
 func update_animation_params(direction: Vector2) -> void:
@@ -174,12 +184,16 @@ func _on_holster_box_mouse_entered() -> void:
 	Gun.cancel_reload()
 	holstered = true
 	ChargeInterval.start()
+	HolsteredGunSprite.visible = true
+	GunSprite.visible = false
 
 
 func _on_holster_box_mouse_exited() -> void:
 	holstered = false
 	ChargeInterval.stop()
 	FocusFireWindow.start()
+	HolsteredGunSprite.visible = false
+	GunSprite.visible = true
 
 
 func _on_charge_interval_timeout() -> void:
