@@ -7,13 +7,14 @@ extends CharacterBody2D
 @export var RollCooldown: Timer
 @export var RollTime: Timer
 @export var Sprite : Sprite2D
+@export var HolsteredGunSprite : Sprite2D
 @export var AnimPlay : AnimationPlayer
 @export var AnimTree : AnimationTree
 
 @export_category("Stats")
-@export var move_speed: int = 80
-@export var roll_speed: int = 300
-@export var focus_walk_speed_modifier := 0.4
+@export var move_speed: int = 150
+@export var roll_speed: int = 500
+@export var focus_walk_speed_modifier := 0.2
 @export var base_accuracy_degrees: int = 10
 
 var base_accuracy := deg_to_rad(base_accuracy_degrees)
@@ -42,14 +43,6 @@ func _ready() -> void:
 	AnimTree.active = true
 
 
-func _process(delta: float) -> void:
-	var look_left: bool = get_global_mouse_position().x < global_position.x
-	var walk_left: bool = direction.x < 0
-	
-	Sprite.flip_h = look_left
-	reversing = walk_left != look_left
-
-
 func _physics_process(_delta: float) -> void:
 	if rolling:
 		velocity = direction * roll_speed
@@ -60,6 +53,23 @@ func _physics_process(_delta: float) -> void:
 	
 	move_and_slide()
 	update_animation_params(direction)
+	flippage()
+
+
+var look_left: bool = false
+var walk_left: bool = false
+
+func flippage() -> void:
+	var dead_zone := 0.5
+	var dx := get_global_mouse_position().x - global_position.x
+	if abs(dx) < dead_zone:
+		return
+	look_left = dx < 0
+	walk_left = direction.x < 0
+	reversing = walk_left != look_left
+	
+	Sprite.flip_h = look_left
+	HolsteredGunSprite.flip_h = look_left
 
 
 func update_animation_params(direction: Vector2) -> void:
