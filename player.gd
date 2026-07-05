@@ -13,7 +13,7 @@ extends CharacterBody2D
 @export var AnimTree : AnimationTree
 
 @export_category("Stats")
-@export var move_speed: int = 150
+@export var move_speed: int = 130
 @export var roll_speed: int = 500
 @export var focus_walk_speed_modifier := 0.2
 @export var base_accuracy_degrees: int = 10
@@ -83,6 +83,8 @@ func flippage() -> void:
 
 
 func update_animation_params(direction: Vector2) -> void:
+	if rolling:
+		return
 	if focused and direction != Vector2.ZERO:
 		state_machine.travel("walk" if not reversing else "walk_reverse")
 	elif direction != Vector2.ZERO:
@@ -158,23 +160,25 @@ func roll() -> void:
 	_on_holster_box_mouse_exited()
 	Gun.cancel_reload()
 	direction = Input.get_vector("left", "right", "up", "down")
-	
-	play_roll_animation()
-
-
-func play_roll_animation() -> void:
-	var tween := get_tree().create_tween()
-	var roll_direction := 1
-	if direction.x == 0 and get_global_mouse_position().x - global_position.x < 0 \
-		or direction.x < 0:
-		roll_direction = -1
-	tween.tween_property(Sprite, "rotation_degrees", 360 * roll_direction, 0.15)
-	await tween.finished
-	Sprite.rotation = 0
+	GunSprite.visible = false
+	state_machine.travel("roll")
+	#play_roll_animation()
+#
+#
+#func play_roll_animation() -> void:
+	#var tween := get_tree().create_tween()
+	#var roll_direction := 1
+	#if direction.x == 0 and get_global_mouse_position().x - global_position.x < 0 \
+		#or direction.x < 0:
+		#roll_direction = -1
+	#tween.tween_property(Sprite, "rotation_degrees", 360 * roll_direction, 0.15)
+	#await tween.finished
+	#Sprite.rotation = 0
 
 
 func _on_roll_time_timeout() -> void:
 	rolling = false
+	GunSprite.visible = true
 	RollCooldown.start()
 
 

@@ -82,7 +82,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_1jxqw"]
 resource_name = "roll"
-length = 0.4
+length = 0.3
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -91,10 +91,10 @@ tracks/0/path = NodePath("Frog:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(1.8626451e-08, 0.05000002, 0.100000024, 0.15000002, 0.20000002, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [34, 35, 36, 37, 38, 39, 40, 41]
+"values": [35, 36, 37, 38, 39, 40, 41]
 }
 
 [sub_resource type="Animation" id="Animation_sweqy"]
@@ -304,24 +304,32 @@ switch_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7ahtn"]
 switch_mode = 1
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sweqy"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7lmhl"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dx0e4"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jm5j8"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_nvl01"]
-states/End/position = Vector2(902, 210)
-states/Start/position = Vector2(238, 158)
+states/End/position = Vector2(-22, 321)
+states/Start/position = Vector2(-22, 230)
 states/death/node = SubResource("AnimationNodeAnimation_1jxqw")
-states/death/position = Vector2(633, 210)
+states/death/position = Vector2(173, 310)
 states/idle/node = SubResource("AnimationNodeAnimation_i3pqv")
 states/idle/position = Vector2(477, 204)
 states/roll/node = SubResource("AnimationNodeAnimation_2hs0m")
-states/roll/position = Vector2(250, 312)
+states/roll/position = Vector2(749, 155)
 states/run/node = SubResource("AnimationNodeAnimation_hqtel")
 states/run/position = Vector2(482, 368)
 states/run_reverse/node = SubResource("AnimationNodeAnimation_nvl01")
-states/run_reverse/position = Vector2(243.46964, 381)
+states/run_reverse/position = Vector2(696.4696, 356)
 states/walk/node = SubResource("AnimationNodeAnimation_sweqy")
 states/walk/position = Vector2(466, 25)
 states/walk_reverse/node = SubResource("AnimationNodeAnimation_ivps1")
-states/walk_reverse/position = Vector2(328.46964, 32)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_2hs0m"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_1jxqw"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_dw050"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_b26j0"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_n7ghd"), "idle", "roll", SubResource("AnimationNodeStateMachineTransition_nvl01"), "walk", "roll", SubResource("AnimationNodeStateMachineTransition_ivps1"), "run", "roll", SubResource("AnimationNodeStateMachineTransition_urp6f"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_bwjto"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_i3pqv"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_hqtel"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_606se"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_u1c27"), "run", "death", SubResource("AnimationNodeStateMachineTransition_op7ga"), "death", "End", SubResource("AnimationNodeStateMachineTransition_q13i1"), "walk", "walk_reverse", SubResource("AnimationNodeStateMachineTransition_pylmc"), "walk_reverse", "walk", SubResource("AnimationNodeStateMachineTransition_pbfsw"), "run", "run_reverse", SubResource("AnimationNodeStateMachineTransition_5tmop"), "run_reverse", "run", SubResource("AnimationNodeStateMachineTransition_7ahtn")]
+states/walk_reverse/position = Vector2(650.4696, 42)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_2hs0m"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_1jxqw"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_dw050"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_b26j0"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_n7ghd"), "idle", "roll", SubResource("AnimationNodeStateMachineTransition_nvl01"), "walk", "roll", SubResource("AnimationNodeStateMachineTransition_ivps1"), "run", "roll", SubResource("AnimationNodeStateMachineTransition_urp6f"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_bwjto"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_i3pqv"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_hqtel"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_606se"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_u1c27"), "run", "death", SubResource("AnimationNodeStateMachineTransition_op7ga"), "death", "End", SubResource("AnimationNodeStateMachineTransition_q13i1"), "walk", "walk_reverse", SubResource("AnimationNodeStateMachineTransition_pylmc"), "walk_reverse", "walk", SubResource("AnimationNodeStateMachineTransition_pbfsw"), "run", "run_reverse", SubResource("AnimationNodeStateMachineTransition_5tmop"), "run_reverse", "run", SubResource("AnimationNodeStateMachineTransition_7ahtn"), "walk_reverse", "roll", SubResource("AnimationNodeStateMachineTransition_sweqy"), "run_reverse", "roll", SubResource("AnimationNodeStateMachineTransition_7lmhl"), "walk_reverse", "death", SubResource("AnimationNodeStateMachineTransition_dx0e4"), "run_reverse", "death", SubResource("AnimationNodeStateMachineTransition_jm5j8")]
 graph_offset = Vector2(-147.53036, 0)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
