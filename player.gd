@@ -160,6 +160,8 @@ func roll() -> void:
 	_on_holster_box_mouse_exited()
 	Gun.cancel_reload()
 	direction = Input.get_vector("left", "right", "up", "down")
+	if direction == Vector2.ZERO:
+		direction = (get_global_mouse_position() - global_position).normalized()
 	GunSprite.visible = false
 	state_machine.travel("roll")
 	#play_roll_animation()
