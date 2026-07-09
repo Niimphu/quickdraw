@@ -337,8 +337,8 @@ radius = 2.0
 height = 8.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i3pqv"]
-radius = 5.0
-height = 22.0
+radius = 8.0
+height = 26.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1997606648 node_paths=PackedStringArray("Gun", "ChargeInterval", "FocusFireWindow", "RollCooldown", "RollTime", "Sprite", "HolsteredGunSprite", "GunSprite", "AnimPlay", "AnimTree")]
 y_sort_enabled = true
